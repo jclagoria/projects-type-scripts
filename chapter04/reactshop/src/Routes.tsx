@@ -1,14 +1,21 @@
 import * as React from "react";
 
-import {BrowserRouter as Router, RouteComponentProps, Redirect, Route, Switch} from "react-router-dom";
+import { Suspense } from "react";
+
+import {BrowserRouter as Router,
+    RouteComponentProps,
+    Redirect,
+    Route,
+    Switch} from "react-router-dom";
 import { CSSTransition, TransitionGroup  } from "react-transition-group";
 
 import Header from "./Header";
-import AdminPage from "./AdminPage";
 import ProductsPage from "./ProductsPage";
 import ProdcutPage from "./ProdcutPage";
 import NotFoundPage from "./NotFoundPage";
 import LoginPage from "./Login";
+
+const AdminPage = React.lazy(() => import("./AdminPage"));
 
 const RoutesWrap: React.FC = () => {
     return (
@@ -34,9 +41,14 @@ const Routes: React.FC<RouteComponentProps> = props => {
                             <Route exact={true} path="/products" component={ProductsPage}/>
                             <Route path="/products/:id" component={ProdcutPage}/>
                             <Route path="/admin">
-                                {
-                                    loggedIn ? <AdminPage/> : <Redirect to="/login" />
-                                }
+                                {loggedIn ? (
+                                    <Suspense
+                                        fallback={<div className="page-container">Loading...</div>}>
+                                        <AdminPage />
+                                    </Suspense>
+                                ) : (
+                                    <Redirect to="/login" />
+                                )}
                             </Route>
                             <Route path="/login" component={LoginPage} />
                             <Route component={NotFoundPage}/>
