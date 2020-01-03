@@ -1,0 +1,54 @@
+{
+  "program": {
+    "fileInfos": {
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.d.ts": {
+        "version": "49ff9798f592c8b7e628fd881401e68810c1b3589ecd7a41b32b3c287374cde0",
+        "signature": "49ff9798f592c8b7e628fd881401e68810c1b3589ecd7a41b32b3c287374cde0"
+      },
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "ff5688d6b2fcfef06842a395d7ff4d5730d45b724d4c48913118c889829052a1",
+        "signature": "ff5688d6b2fcfef06842a395d7ff4d5730d45b724d4c48913118c889829052a1"
+      },
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "2d53f3741e5a4f78a90f623387d71a1cc809bb258f10cdaec034b67cbf71022f",
+        "signature": "2d53f3741e5a4f78a90f623387d71a1cc809bb258f10cdaec034b67cbf71022f"
+      },
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b",
+        "signature": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b"
+      },
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9",
+        "signature": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9"
+      },
+      "./src/utils.ts": {
+        "version": "14bc9b35a354d6aae3b8879e9767096f6879c87c40d92e252dcf9a9ce2d14491",
+        "signature": "1cda68f536a143769f9d59a5cbc8140c923bf060f1dcaf03dddefb9a9e98505b"
+      }
+    },
+    "options": {
+      "composite": true,
+      "declaration": true,
+      "target": 1,
+      "outDir": "./dist",
+      "module": 5,
+      "sourceMap": true,
+      "noImplicitReturns": true,
+      "noImplicitAny": true,
+      "rootDir": "./src",
+      "declarationMap": true,
+      "configFilePath": "./tsconfig.json"
+    },
+    "referencedMap": {},
+    "exportedModulesMap": {},
+    "semanticDiagnosticsPerFile": [
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.d.ts",
+      "./src/utils.ts",
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.es5.d.ts",
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.dom.d.ts",
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "../../../../../../../usr/lib/node_modules/typescript/lib/lib.scripthost.d.ts"
+    ]
+  },
+  "version": "3.6.3"
+}
