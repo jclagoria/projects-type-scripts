@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import { RouteComponentProps } from "react-router-dom";
+
 import { IProduct, products } from "./ProductsData";
 
 type Props = RouteComponentProps<{id: string}>;
