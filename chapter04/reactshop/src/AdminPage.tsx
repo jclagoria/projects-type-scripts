@@ -73,7 +73,7 @@ const AdminUser: React.FC<RouteComponentProps<{id: string}>> = props => {
       <div>
           <div>
               <b>
-                  Id: 
+                  Id:
               </b>
               <span>
                   {user.id.toString()}
