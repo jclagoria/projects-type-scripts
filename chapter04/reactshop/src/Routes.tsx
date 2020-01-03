@@ -10,7 +10,7 @@ import LoginPage from "./Login";
 
 const Routes: React.FC = () => {
 
-    const [loggedIn, setLoggeddIn] = React.useState(false);
+    const [loggedIn, setLoggeddIn] = React.useState(true);
 
     return(
         <Router>
