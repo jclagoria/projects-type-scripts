@@ -106,3 +106,13 @@ code {
 .admin-link-active {
   border-bottom: #6f6e6e solid 2px;
 }
+
+.product-reviews {
+  list-style: none;
+  padding: 0p;
+}
+
+.product-reviews .product-reviews-item {
+  display: block;
+  padding: 8px 0px;
+}
