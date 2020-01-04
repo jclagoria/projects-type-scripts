@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { IProduct } from "./ProductsData";
+import Tabs from "./Tabs";
 
 interface IProps {
     product: IProduct;
@@ -18,6 +19,7 @@ const Product: React.FC<IProps> = props => {
 
   return (<React.Fragment>
       <h1>{product.name}</h1>
+      <Tabs headings={["Description", "Reviews"]} />
       <p>{product.description}</p>
       <div className="product-reviews">
           { product.reviews.map( review => (
