@@ -19,7 +19,12 @@ const Product: React.FC<IProps> = props => {
 
   return (<React.Fragment>
       <h1>{product.name}</h1>
-      <Tabs headings={["Description", "Reviews"]} />
+      <Tabs>
+          <Tabs.Tab name="Description" initialActive={true}>
+              <b>Description</b>
+          </Tabs.Tab>
+          <Tabs.tab name="Reviews">Reviews</Tabs.tab>
+      </Tabs>
       <p>{product.description}</p>
       <div className="product-reviews">
           { product.reviews.map( review => (
