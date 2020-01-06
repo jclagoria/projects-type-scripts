@@ -1,33 +1,22 @@
 import * as React from "react";
 
-interface IProps {
-    heandings: string[];
-}
-
 interface IState {
-    activeHeading: string;
+    activeName: string;
 }
 
-class Tabs extends React.Component<IProps, IState> {
-    public constructor(props: IProps) {
-        super(props);
-        this.state = {
-            activeHeading: this.props.heandings
-            && this.props.heandings.length > 0 ?
-                this.props.heandings[0] : ""
-        };
-    }
+interface ITabProps {
+    name: String;
+    initialActive?: string;
+}
+
+class Tabs extends React.Component<ITabProps, IState> {
+
+    public static Tab: React.FC<ITabProps> = props => <li>{props.children}</li>;
 
     public render() {
         return (
             <ul className="tabs">
-                {this.props.heandings.map( heading =>(
-                  <li onClick={this.handleTabClick}
-                      className={heading === this.state.activeHeading
-                      ? "active" : ""}>
-                      {heading}
-                  </li>
-                ))}
+                {this.props.children}
             </ul>
         );
     }
