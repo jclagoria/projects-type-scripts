@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Prompt, RouteComponentProps } from "react-router-dom";
 
-import { IProduct, products } from "./ProductsData";
+import { getProduct, IProduct } from "./ProductsData";
 import Product from "./Product";
 
 type Props = RouteComponentProps<{id: string}>;
@@ -10,6 +10,7 @@ type Props = RouteComponentProps<{id: string}>;
 interface IState {
     product?: IProduct;
     added: boolean;
+    loading: boolean;
 }
 
 class ProdcutPage extends React.Component<Props, IState> {
@@ -17,17 +18,20 @@ class ProdcutPage extends React.Component<Props, IState> {
     public constructor(props: Props) {
         super(props);
         this.state = {
-            added: false
+            added: false,
+            loading: true
         };
     }
 
-    public componentDidMount(): void {
+    public async componentDidMount() {
         if(this.props.match.params.id) {
             const id: number =
                 parseInt(this.props.match.params.id, 10);
-            const product = products.filter(p => p.id === id)[0];
+            const product = await getProduct(id);
 
-            this.setState({product});
+            if(product !== null){
+                this.setState({product, loading: false});
+            }
         }
     }
 

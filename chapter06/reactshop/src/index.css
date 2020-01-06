@@ -54,6 +54,26 @@ code {
   font-size: large;
 }
 
+.tabs {
+   list-style: none;
+  padding: 0px;
+}
+
+.tabs li {
+  display: inline-block;
+  padding: 5px;
+  margin: 0px 5px 0px 5px;
+  cursor: pointer;
+}
+
+.tabs li:focus {
+  outline: none;
+}
+
+.tabs li.active {
+  border-bottom: #222222 solid 2px;
+}
+
 .animate-enter {
   opacity: 0;
   z-index: 1;
@@ -105,4 +125,14 @@ code {
 
 .admin-link-active {
   border-bottom: #6f6e6e solid 2px;
+}
+
+.product-reviews {
+  list-style: none;
+  padding: 0px;
+}
+
+.product-reviews .product-reviews-item {
+  display: block;
+  padding: 8px 0px;
 }
