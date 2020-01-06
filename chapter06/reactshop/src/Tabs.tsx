@@ -7,6 +7,7 @@ interface IState {
 interface ITabProps {
     name: String;
     initialActive?: boolean;
+    heading: () => string | JSX.Element;
 }
 
 interface ITabsContext {
@@ -33,7 +34,7 @@ class Tabs extends React.Component<ITabProps, IState> {
                     return (
                         <li onClick={handleTabClick}
                             className={props.name === activeName ? "active" : ""}>
-                            {props.children}
+                            {props.heading()}
                         </li>
                     );
                 }
