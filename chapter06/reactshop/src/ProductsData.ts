@@ -11,6 +11,16 @@ export interface IProduct {
     reviews: IReview[];
 }
 
+export const getProduct = async (id: number): Promise<IProduct | null> => {
+  await wait(1000);
+  const foundProducts = products.filter(customer => customer.id === id);
+  return foundProducts.length === 0 ? null : foundProducts[0];
+};
+
+const wait = (ms: number): Promise<void> => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 export const products: IProduct[] = [
     {
         description:  "A collection of navigational components that compose declaratively with your app",
