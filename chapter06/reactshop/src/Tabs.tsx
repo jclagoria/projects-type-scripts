@@ -6,25 +6,53 @@ interface IState {
 
 interface ITabProps {
     name: String;
-    initialActive?: string;
+    initialActive?: boolean;
 }
+
+interface ITabsContext {
+    activeName?: string;
+    handleTabClick?: (name: string) => void;
+}
+
+const TabsContext = React.createContext<ITabsContext>({});
 
 class Tabs extends React.Component<ITabProps, IState> {
 
-    public static Tab: React.FC<ITabProps> = props => <li>{props.children}</li>;
+    public static Tab: React.FC<ITabProps> = props => (
+        <TabsContext.Consumer>
+            {
+                (context: ITabsContext) => {
+                    const activeName =  context.activeName
+                        ? context.activeName : props.initialActive
+                            ? props.name : "";
+                    const handleTabClick = (e: React.MouseEvent<HTMLLIElement>) => {
+                        if(context.handleTabClick){
+                            context.handleTabClick(props.name.toString());
+                        }
+                    };
+                    return (
+                        <li onClick={handleTabClick}
+                            className={props.name === activeName ? "active" : ""}>
+                            {props.children}
+                        </li>
+                    );
+                }
+            }
+        </TabsContext.Consumer>
+    );
 
     public render() {
         return (
-            <ul className="tabs">
-                {this.props.children}
-            </ul>
+            <TabsContext.Provider
+                value={{activeName: this.state ? this.state.activeName : "",
+                handleTabClick: this.handleTabClick}}>
+                <ul className="tabs">{this.props.children}</ul>
+            </TabsContext.Provider>
         );
     }
 
-    private handleTabClick = (e: React.MouseEvent<HTMLLIElement>) => {
-        const li = e.target as HTMLLIElement;
-        const heading: string = li.textContent ? li.textContent : "";
-        this.setState({activeHeading: heading})
+    private handleTabClick = (name: string) => {
+       this.setState({activeName: name});
     };
 }
 

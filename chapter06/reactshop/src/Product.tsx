@@ -19,11 +19,11 @@ const Product: React.FC<IProps> = props => {
 
   return (<React.Fragment>
       <h1>{product.name}</h1>
-      <Tabs>
+      <Tabs name="">
           <Tabs.Tab name="Description" initialActive={true}>
               <b>Description</b>
           </Tabs.Tab>
-          <Tabs.tab name="Reviews">Reviews</Tabs.tab>
+          <Tabs.Tab name="Reviews">Reviews</Tabs.Tab>
       </Tabs>
       <p>{product.description}</p>
       <div className="product-reviews">
