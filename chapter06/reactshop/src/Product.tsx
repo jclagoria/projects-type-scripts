@@ -20,18 +20,24 @@ const Product: React.FC<IProps> = props => {
   return (<React.Fragment>
       <h1>{product.name}</h1>
       <Tabs name="" heading={() => ""}>
-          <Tabs.Tab name="Description" initialActive={true} heading={() => "Description"} />
-          <Tabs.Tab name="Reviews" heading={() => "Reviews"}/>
+          <Tabs.Tab name="Description"
+                    initialActive={true}
+                    heading={() => "Description"} >
+            <p>{product.description}</p>
+          </Tabs.Tab>
+
+          <Tabs.Tab
+              name="Reviews" heading={() => "Reviews"}>
+              <ul className="product-reviews">
+                  {product.reviews.map( review => (
+                      <li key={review.reviewer}>
+                          <i>"{review.comment}"</i> - {review.reviewer}
+                      </li>
+                  ))}
+              </ul>
+          </Tabs.Tab>
       </Tabs>
-      <p>{product.description}</p>
-      <div className="product-reviews">
-          { product.reviews.map( review => (
-              <li key={review.reviewer} className="product-reviews-item">
-                  <i>"{review.comment}"</i> - {review.reviewer}
-              </li>
-            ))
-          }
-      </div>
+
       <p className="product-price">
           {
               new Intl.NumberFormat("en-US", {
