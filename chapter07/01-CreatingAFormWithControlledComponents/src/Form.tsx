@@ -19,31 +19,63 @@ interface IFieldProps {
     options?: string[];
 }
 
+interface IFormContext {
+    values: IValues;
+    setValues?: (fieldName: string, value: any) => void;
+}
+
+const FormContext = React.createContext<IFormContext>({
+    values: {}
+});
+
 export class Form extends React.Component<IFormProps, IState> {
 
     public static Field: React.FC<IFieldProps> = props => {
+
         const { name, label, type, options } = props;
+
+        const handleChange = (
+            e:
+                | React.ChangeEvent<HTMLInputElement>
+                | React.ChangeEvent<HTMLTextAreaElement>
+                | React.ChangeEvent<HTMLSelectElement>,
+            context: IFormContext
+        ) => {
+            if(context.setValues) {
+                context.setValues(props.name, e.currentTarget.value);
+            }
+        };
+
         return (
-            <div className="form-group">
-                <label htmlFor={name}>{label}</label>
-                {(type === "Text" || type === "Email") && (
-                    <input type={type.toLowerCase()} id={name}/>
-                )}
+            <FormContext.Consumer>
+                {context => (
+                        <div className="form-group">
+                            <label htmlFor={name}>{label}</label>
+                            {(type === "Text" || type === "Email") && (
+                                <input type={type.toLowerCase()} id={name}
+                                       value={context.values[name]}
+                                       onChange={e => handleChange(e, context)}/>
+                            )}
 
-                {type === "TextArea" && (
-                    <textarea id={name} />
-                )}
+                            {type === "TextArea" && (
+                                <textarea id={name} value={context.values[name]}
+                                          onChange={e => handleChange(e, context)}/>
+                            )}
 
-                {type === "Select" && (
-                    <select>
-                        {options && options.map(option => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </select>
-                )}
-            </div>
+                            {type === "Select" && (
+                                <select value={context.values[name]}
+                                        onChange={e => handleChange(e, context)}>
+                                    {options && options.map(option => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
+                    )
+                }
+            </FormContext.Consumer>
         );
     };
 
@@ -55,12 +87,25 @@ export class Form extends React.Component<IFormProps, IState> {
     }
 
     public render() {
+
+        const context: IFormContext = {
+            setValues: this.setValue,
+            values: this.state.values
+        };
+
         return (
-            <form className="form" noValidate={true}>
-                {this.props.children}
-            </form>
+            <FormContext.Provider value={context}>
+                <form className="form" noValidate={true}>
+                    {this.props.children}
+                </form>
+            </FormContext.Provider>
         );
     }
+
+    private setValue = (fieldName: string, value: any) => {
+        const newValues = {...this.state.values, [fieldName]: value};
+        this.setState({values: newValues});
+    };
 }
 
 Form.Field.defaultProps = {
