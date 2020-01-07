@@ -4,7 +4,6 @@ interface ITabsContext {
   activeName?: string;
   handleTabClick?: (name: string, content: React.ReactNode) => void;
 }
-const TabsContext = React.createContext<ITabsContext>({});
 
 interface IState {
   activeName: string;
@@ -15,6 +14,9 @@ interface ITabProps {
   initialActive?: boolean;
   heading: () => string | JSX.Element;
 }
+
+const TabsContext = React.createContext<ITabsContext>({});
+
 class Tabs extends React.Component<{}, IState> {
   public static Tab: React.FC<ITabProps> = props => (
     <TabsContext.Consumer>
