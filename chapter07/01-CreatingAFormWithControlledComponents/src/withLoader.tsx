@@ -6,7 +6,7 @@ interface IProps {
 
 const withLoader = <P extends object>(
   Component: React.ComponentType<P>
-): React.SFC<P & IProps> => ({ loading, ...props }: IProps) =>
+): React.FC<P & IProps> => ({ loading, ...props }: IProps) =>
   loading ? (
     <div className="loader-overlay">
       <div className="loader-circle-wrap">

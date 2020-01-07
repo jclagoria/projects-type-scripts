@@ -45,8 +45,7 @@ class ProductsPage extends React.Component<RouteComponentProps, IState> {
             if (
               !this.state.search ||
               (this.state.search &&
-                product.name
-                  .toLowerCase()
+                product.name.toLowerCase()
                   .indexOf(this.state.search.toLowerCase()) > -1)
             ) {
               return (

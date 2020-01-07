@@ -9,7 +9,7 @@ interface IProps {
   onAddToBasket: () => void;
 }
 
-const Product: React.SFC<IProps> = props => {
+const Product: React.FC<IProps> = props => {
   const product = props.product;
 
   const handleAddClick = () => {
@@ -24,11 +24,8 @@ const Product: React.SFC<IProps> = props => {
     <React.Fragment>
       <h1>{product.name}</h1>
       <Tabs>
-        <Tabs.Tab
-          name="Description"
-          initialActive={true}
-          heading={() => <b>Description</b>}
-        >
+        <Tabs.Tab name="Description"
+          initialActive={true} heading={() => <b>Description</b>}>
           <p>{product.description}</p>
         </Tabs.Tab>
 

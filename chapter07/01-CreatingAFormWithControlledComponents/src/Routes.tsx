@@ -13,13 +13,15 @@ import {
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import Header from "./Header";
-const AdminPage = React.lazy(() => import("./AdminPage"));
 import ProductsPage from "./ProductsPage";
 import ProductPage from "./ProductPage";
 import LoginPage from "./LoginPage";
 import NotFoundPage from "./NotFoundPage";
+import ContactUsPage from "./ContactUsPage";
 
-const RoutesWrap: React.SFC = () => {
+const AdminPage = React.lazy(() => import("./AdminPage"));
+
+const RoutesWrap: React.FC = () => {
   return (
     <Router>
       <Route component={Routes} />
@@ -27,7 +29,7 @@ const RoutesWrap: React.SFC = () => {
   );
 };
 
-const Routes: React.SFC<RouteComponentProps> = props => {
+const Routes: React.FC<RouteComponentProps> = props => {
   const [loggedIn, setLoggedIn] = React.useState(true);
   return (
     <div>
@@ -35,18 +37,16 @@ const Routes: React.SFC<RouteComponentProps> = props => {
       <TransitionGroup>
         <CSSTransition
           key={props.location.key}
-          timeout={500}
-          classNames="animate"
-        >
+          timeout={500} classNames="animate">
           <Switch>
             <Redirect exact={true} from="/" to="/products" />
             <Route exact={true} path="/products" component={ProductsPage} />
             <Route path="/products/:id" component={ProductPage} />
+            <Route path="/contactus" component={ContactUsPage}/>
             <Route path="/admin">
               {loggedIn ? (
                 <Suspense
-                  fallback={<div className="page-container">Loading...</div>}
-                >
+                  fallback={<div className="page-container">Loading...</div>}>
                   <AdminPage />
                 </Suspense>
               ) : (
