@@ -86,6 +86,18 @@ export class Form extends React.Component<IFormProps, IState> {
             }
         };
 
+        const handleBlur = (
+            e:
+                | React.FocusEvent<HTMLInputElement>
+                | React.FocusEvent<HTMLTextAreaElement>
+                | React.FocusEvent<HTMLSelectElement>,
+            context: IFormContext
+        ) => {
+            if(context.validate) {
+                context.validate(props.name, e.currentTarget.value);
+            }
+        };
+
         return (
             <FormContext.Consumer>
                 {context => (
@@ -94,17 +106,20 @@ export class Form extends React.Component<IFormProps, IState> {
                             {(type === "Text" || type === "Email") && (
                                 <input type={type.toLowerCase()} id={name}
                                        value={context.values[name]}
-                                       onChange={e => handleChange(e, context)}/>
+                                       onChange={e => handleChange(e, context)}
+                                       onBlur={e => handleBlur(e, context)}/>
                             )}
 
                             {type === "TextArea" && (
                                 <textarea id={name} value={context.values[name]}
-                                          onChange={e => handleChange(e, context)}/>
+                                          onChange={e => handleChange(e, context)}
+                                        onBlur={e => handleBlur(e, context)}/>
                             )}
 
                             {type === "Select" && (
                                 <select value={context.values[name]}
-                                        onChange={e => handleChange(e, context)}>
+                                        onChange={e => handleChange(e, context)}
+                                        onBlur={e => handleBlur(e, context)}>
                                     {options && options.map(option => (
                                         <option key={option} value={option}>
                                             {option}
