@@ -11,6 +11,7 @@ interface IFormProps {
 
 interface IState {
     values: IValues;
+    errors: IErrors;
 }
 
 interface IFieldProps {
@@ -21,6 +22,7 @@ interface IFieldProps {
 }
 
 interface IFormContext {
+    errors: IErrors;
     values: IValues;
     setValues?: (fieldName: string, value: any) => void;
 }
@@ -32,6 +34,10 @@ interface IValidation {
 
 interface IValidationProp {
     [key: string]: IValidation | IValidation[];
+}
+
+interface IErrors {
+    [key: string]: string[];
 }
 
 export type Validator = (
@@ -57,6 +63,7 @@ export const minLenght: Validator = (
             ? `This must be at least ${length} characters`: "";
 
 const FormContext = React.createContext<IFormContext>({
+    errors: {},
     values: {}
 });
 
@@ -113,14 +120,20 @@ export class Form extends React.Component<IFormProps, IState> {
 
     constructor(props: IFormProps) {
         super(props);
+        const errors: IErrors = {};
+        Object.keys(props.defaultValues).forEach(fieldName => {
+            errors[fieldName] = [];
+        });
         this.state = {
-          values: props.defaultValues
+            errors,
+            values: props.defaultValues
         };
     }
 
     public render() {
 
         const context: IFormContext = {
+            errors: this.state.errors,
             setValues: this.setValue,
             values: this.state.values
         };
