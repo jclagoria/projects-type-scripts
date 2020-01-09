@@ -2,7 +2,7 @@ import { IProduct } from "./ProductsData";
 
 export enum ProductsActionTypes {
     GETALL = "PRODUCTS/GETALL",
-    LOEADING = "PRODUCTS/LOADING"
+    LOADING = "PRODUCTS/LOADING"
 }
 
 export interface IProductsGetAllAction {
@@ -11,10 +11,10 @@ export interface IProductsGetAllAction {
 }
 
 export interface IProductsLoadingAction {
-    type: ProductsActionTypes.LOEADING
+    type: ProductsActionTypes.LOADING
 }
 
-export interface IProdcutsState {
+export interface IProductsState {
     readonly products: IProduct[];
     readonly productsLoading: boolean;
 }
