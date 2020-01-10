@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 
-import { getProduct as getProductsFromAPI } from "./ProductsData";
+import { getProducts as getProductsFromAPI } from "./ProductsData";
 import { IProductsGetAllAction, IProductsLoadingAction, IProductsState, ProductsActionTypes } from "./ProductsType";
 
 const loading: ActionCreator<IProductsLoadingAction> = () => ({

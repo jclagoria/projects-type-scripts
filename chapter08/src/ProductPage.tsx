@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import { Prompt, RouteComponentProps } from "react-router-dom";
+
 import { getProduct, IProduct } from "./ProductsData";
 import Product from "./Product";
 
