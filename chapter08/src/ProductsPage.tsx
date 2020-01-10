@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import { RouteComponentProps } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { IApplicationState } from "./Store";
 import { getProducts } from "./ProductsActions";
 import {IProduct} from "./ProductsData";
+import ProductList from "./ProductsList";
 
 import "url-search-params-polyfill";
 
@@ -43,23 +43,9 @@ class ProductsPage extends React.Component<IProps> {
         <p>
           Welcome to React Shop where you can get all your tools for ReactJS!
         </p>
-        <ul className="product-list">
-          {this.props.products.map(product => {
-            if (
-              !search || (search
-                        && product.name.toLowerCase()
-                            .indexOf(search.toLowerCase()) > -1)
-            ) {
-              return (
-                <li key={product.id} className="product-list-item">
-                  <Link to={`/products/${product.id}`}>{product.name}</Link>
-                </li>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </ul>
+        <ProductList search={search}
+                     products={this.props.products}
+                     loading={this.props.loading}/>
       </div>
     );
   }
